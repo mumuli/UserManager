@@ -10,7 +10,9 @@ public class PageModel {
 	}
 	public void setPage(int page) {
 		if (page < 0) {			
-			this.page = page;
+			this.page = 1;
+		} else if (page > getPageCount()) {
+			this.page = getPageCount();
 		}
 	}
 	public int getPageSize() {
@@ -24,6 +26,11 @@ public class PageModel {
 	
 	public void setTotalCount(long totalCount) {
 		this.totalCount = totalCount;
+		
+		// update page 
+		if(page > getPageCount()) {
+			page = getPageCount();
+		}
 	}
 	
 	public long getTotalCount() {

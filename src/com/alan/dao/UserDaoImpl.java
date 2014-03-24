@@ -63,4 +63,20 @@ public class UserDaoImpl implements UserDao {
 								  .list();
 		return users;
 	}
+
+	/* (non-Javadoc)
+	 * @see com.alan.dao.UserDao#delete(int[])
+	 */
+	@Override
+	public int delete(int[] uidsToBeDeleted) {
+		Session session = sessionFactory.getCurrentSession();
+		int count = 0;
+		for (int uid : uidsToBeDeleted) {
+			User user = new User();
+			user.setId(uid);
+			session.delete(user);
+			count++;
+		}
+		return count;
+	}
 }

@@ -35,4 +35,12 @@ public class UserManagerImpl implements UserManager {
 	public List<User> list(PageModel pageModel) {
 		return userDao.load(pageModel);
 	}
+
+	/* (non-Javadoc)
+	 * @see com.alan.manager.UserManager#delete(int[])
+	 */
+	@Override
+	public int delete(int[] uidsToBeDeleted) {
+		return userDao.delete(uidsToBeDeleted);
+	}
 }

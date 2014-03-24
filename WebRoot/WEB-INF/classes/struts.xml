@@ -15,6 +15,12 @@
 			<result name="input">/index.jsp</result>
 			<result name="load">/load.jsp</result>
 			<result name="list">/list.jsp</result>
+			<result name="load_list" type="redirectAction">
+				<param name="actionName">user_list.do</param>
+				<param name="page">${page}</param>
+				<param name="pageSize">${pageSize}</param>
+			</result>
+			
 		</action>
     </package>
 </struts>

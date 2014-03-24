@@ -14,4 +14,6 @@ public interface UserManager {
 	public List<User> listAll();
 	
 	public List<User> list(PageModel pageModel);
+	
+	public int delete(int[] uidsToBeDeleted);
 }

@@ -5,11 +5,14 @@ import java.util.List;
 import com.alan.manager.UserManager;
 import com.alan.po.User;
 import com.alan.util.PageModel;
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class UserAction extends ActionSupport implements ModelDriven<User> {
 	
+	private static final String LOAD_LIST = "load_list";
+
 	private static final String LOAD = "load";
 
 	private static final String LIST = "list";
@@ -30,7 +33,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	
 	private PageModel pageModel;
 	
-	private int[] uids;
+	private String uidsToBeDeleted;
 	
 	public UserAction() {
 		page = 1;
@@ -60,11 +63,24 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		return userList;
 	}
 	
+	/**
+	 * @return the page
+	 */
+	public int getPage() {
+		return page;
+	}
 	
 	public void setPage(int page) {
 		this.page = page;
 	}
 
+	/**
+	 * @return the pageSize
+	 */
+	public int getPageSize() {
+		return pageSize;
+	}
+	
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
@@ -74,10 +90,10 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	}
 	
 	/**
-	 * @param uids the uids to set
+	 * @param uidsToBeDeleted the uidsToBeDeleted to set
 	 */
-	public void setUids(int[] uids) {
-		this.uids = uids;
+	public void setUidsToBeDeleted(String uidsToBeDeleted) {
+		this.uidsToBeDeleted = uidsToBeDeleted;
 	}
 	
 	public String add() throws Exception {
@@ -101,5 +117,17 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		//this.userList = userMgr.listAll();
 		userList = userMgr.list(pageModel);
 		return LIST;
+	}
+	
+	public String delete() throws Exception {
+		Gson gson = new Gson();
+		int[] uids = gson.fromJson(uidsToBeDeleted, int[].class);
+		
+		System.out.println("uids: " + uids);
+		if (uids.length > 0) {
+			userMgr.delete(uids);
+		}
+		
+		return LOAD_LIST;
 	}
 }
