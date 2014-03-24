@@ -1,0 +1,27 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<!-- Define hibernate session factory. The factory should be created by Spring -->
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://leyang:3307/user_manager</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">123456</property>
+		
+		<!-- Required dialect -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+		<!-- Required: Passing the manager of session context to Spring -->
+		<!-- In DAO, the openSession can't be used -->
+		<property name="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</property>
+
+		<!-- Option, debugging -->
+		<property name="hibernate.show_sql">true</property>
+	
+		<!-- mapping PO definitions -->
+		<mapping resource="com/alan/po/Group.hbm.xml"/>
+		<mapping resource="com/alan/po/User.hbm.xml"/>
+
+	</session-factory>
+</hibernate-configuration>

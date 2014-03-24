@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- checks the constants in struct.properties -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.action.extension" value="do"/>
+
+    <package name="default" namespace="/" extends="struts-default">
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="success">/index.jsp</result>
+			<result name="input">/index.jsp</result>
+			<result name="load">/load.jsp</result>
+			<result name="list">/list.jsp</result>
+		</action>
+    </package>
+</struts>

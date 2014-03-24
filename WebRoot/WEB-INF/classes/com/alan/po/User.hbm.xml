@@ -1,0 +1,15 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.alan.po">
+	<class name="User" table="t_user">
+		<id name="id" column="uid">
+			<generator class="native"/>
+		</id>
+		<property name="name" not-null="true" length="100"/>
+		<property name="birthday"/>
+		<property name="hireDate" not-null="true"/>
+		<many-to-one name="group" column="gid" foreign-key="fk_user_gid_groud_gid"/>
+	</class>
+</hibernate-mapping>
