@@ -17,22 +17,25 @@
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
 	<script type="text/javascript">
 		function selectAll() {
-			$("input[name='uidcb']").attr("checked", true);
+			$("input[name='uidcb']").attr("checked", "checked");
 		}
 		function unselectAll() {
 			$("input[name='uidcb']").attr("checked", false);
 		}
 		function reverseSelection() {
-			/*
-			//var allCheckboxs = ${"input[name='uidcb']"};
-
-			allCheckboxs.each(function(cb) {
-				${this}.attr("checked", !${this}.attr("checked"));
+		 	$("input[name='uidcb']").each(function () {  
+              this.checked = !this.checked;  
+         });  
+		}
+		function deleteSelection() {
+			var selectedUsers = $("input[name='uidcb'][checked='checked']");
+			var qryString = "";
+			selectedUsers.each(function() {
+				qryString = "uids=" + ${this}.attr("value");
 			});
-			*/
 		}
 	</script>
   </head>
@@ -75,10 +78,10 @@
 		</c:choose>
 		<tr>
 			<td colspan="8" align="left">
-				<a href="javascript:void(0)" onclick="javascript:selectedAll(); return false;">全选   </a>
-				<a href="javascript:void(0)" onclick="javascript:unselectedAll(); return false;">全不选  </a>
+				<a href="javascript:void(0)" onclick="javascript:selectAll(); return false;">全选   </a>
+				<a href="javascript:void(0)" onclick="javascript:unselectAll(); return false;">全不选  </a>
 				<a href="javascript:void(0)" onclick="javascript:reverseSelection(); return false;">反选   </a>
-				<input type="button" value="删除选中"/>
+				<input type="button" value="删除选中" onclick="javascript:deleteSelection(); return false;"/>
 			</td>
 		</tr>
 		<tr>

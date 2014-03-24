@@ -30,6 +30,8 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	
 	private PageModel pageModel;
 	
+	private int[] uids;
+	
 	public UserAction() {
 		page = 1;
 		pageSize = 20;
@@ -69,6 +71,13 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 
 	public PageModel getPageModel() {
 		return pageModel;
+	}
+	
+	/**
+	 * @param uids the uids to set
+	 */
+	public void setUids(int[] uids) {
+		this.uids = uids;
 	}
 	
 	public String add() throws Exception {
