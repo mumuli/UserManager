@@ -1,5 +1,7 @@
 package com.alan.manager;
 
+import java.util.List;
+
 import com.alan.dao.GroupDao;
 import com.alan.po.Group;
 
@@ -17,4 +19,11 @@ public class GroupManagerImpl implements GroupManager {
 		return groupDao.add(group);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.alan.manager.GroupManager#loadAll()
+	 */
+	@Override
+	public List<Group> loadAll() {
+		return groupDao.loadAll();
+	}
 }

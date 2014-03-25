@@ -10,6 +10,7 @@
 	
 	<bean name="userAction" class="com.alan.action.UserAction" scope="prototype">
 		<property name="userMgr" ref="userMgr"/>
+		<property name="groupMgr" ref="groupMgr"/>
 	</bean>
 	
 </beans>

@@ -2,7 +2,9 @@ package com.alan.action;
 
 import java.util.List;
 
+import com.alan.manager.GroupManager;
 import com.alan.manager.UserManager;
+import com.alan.po.Group;
 import com.alan.po.User;
 import com.alan.util.PageModel;
 import com.google.gson.Gson;
@@ -23,9 +25,11 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	
 	private UserManager userMgr;
 	
-	private int uid;
+	private GroupManager groupMgr;
 	
 	private List<User> userList;
+	
+	private List<Group> groupList;
 	
 	private int page;
 	
@@ -33,7 +37,10 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	
 	private PageModel pageModel;
 	
-	private String uidsToBeDeleted;
+	/**
+	 * JSON string which contains all uids to be operated
+	 */
+	private String uids;
 	
 	public UserAction() {
 		page = 1;
@@ -51,14 +58,17 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		this.userMgr = userMgr;
 	}
 	
+	/**
+	 * @param groupMgr the groupMgr to set
+	 */
+	public void setGroupMgr(GroupManager groupMgr) {
+		this.groupMgr = groupMgr;
+	}
+	
 	public User getUser() {
 		return this.user;
 	}
 	
-	public void setUid(int uid) {
-		this.uid = uid;
-	}
-
 	public List<User> getUserList() {
 		return userList;
 	}
@@ -90,10 +100,17 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	}
 	
 	/**
-	 * @param uidsToBeDeleted the uidsToBeDeleted to set
+	 * @param uids the uids to set
 	 */
-	public void setUidsToBeDeleted(String uidsToBeDeleted) {
-		this.uidsToBeDeleted = uidsToBeDeleted;
+	public void setUids(String uids) {
+		this.uids = uids;
+	}
+	
+	/**
+	 * @return the groupList
+	 */
+	public List<Group> getGroupList() {
+		return groupList;
 	}
 	
 	public String add() throws Exception {
@@ -104,8 +121,11 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	}
 	
 	public String load() throws Exception {
-		System.out.println("uid: " + this.uid);
-		this.user = this.userMgr.load(uid);
+		int[] uidsArray = getUids();
+		if (uidsArray.length > 0) {
+			groupList = groupMgr.loadAll();
+			user = userMgr.load(uidsArray[0]);
+		}
 		return LOAD;
 	}
 	
@@ -120,14 +140,23 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	}
 	
 	public String delete() throws Exception {
-		Gson gson = new Gson();
-		int[] uids = gson.fromJson(uidsToBeDeleted, int[].class);
-		
-		System.out.println("uids: " + uids);
-		if (uids.length > 0) {
-			userMgr.delete(uids);
+		int[] uidsArray = getUids();
+
+		if (uidsArray.length > 0) {
+			userMgr.delete(uidsArray);
 		}
 		
 		return LOAD_LIST;
+	}
+
+	public String modify() throws Exception {
+		userMgr.modify(user);
+		return "load_load";
+	}
+	
+	private int[] getUids() {
+		Gson gson = new Gson();
+		int[] uidsArray = gson.fromJson(uids, int[].class);
+		return uidsArray;
 	}
 }

@@ -79,4 +79,14 @@ public class UserDaoImpl implements UserDao {
 		}
 		return count;
 	}
+
+	/* (non-Javadoc)
+	 * @see com.alan.dao.UserDao#modify(int)
+	 */
+	@Override
+	public User modify(User user) {
+		Session session = sessionFactory.getCurrentSession();		
+		session.update(user);
+		return user;
+	}
 }

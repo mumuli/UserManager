@@ -41,9 +41,18 @@
 				uidArray[index++] = $(this).attr("value");
 			});
 			
-			var actionStr = "user_delete.do?uidsToBeDeleted=" + JSON.stringify(uidArray);
+			var actionStr = "user_delete.do?uids=" + JSON.stringify(uidArray);
 			$("#user_form").attr("action", actionStr);
 			$("#user_form").submit();
+		}
+		
+		function modifyUser(uid) {
+			var uidArray = new Array();
+			uidArray[0] = uid;
+			var actionStr = "user_load.do?uids=" + JSON.stringify(uidArray);
+			$("#user_form").attr("action", actionStr);
+			$("#user_form").submit();
+			
 		}
 	</script>
   </head>
@@ -81,7 +90,7 @@
 							<td><fmt:formatDate value="${user.hireDate}" pattern="yyyy年mm月dd日"/></td>
 							<td>${user.group.name}</td>
 							<td>
-								<a href="#">Detail</a> | <a href="#">Delete</a>
+								<a href="javascript:void(0)" onclick="javascript:modifyUser(${user.id}); return false";>Detail</a> | <a href="#">Delete</a>
 							</td>
 						</tr>
 					</c:forEach>

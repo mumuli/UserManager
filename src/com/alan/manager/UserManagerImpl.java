@@ -43,4 +43,19 @@ public class UserManagerImpl implements UserManager {
 	public int delete(int[] uidsToBeDeleted) {
 		return userDao.delete(uidsToBeDeleted);
 	}
+
+	/* (non-Javadoc)
+	 * @see com.alan.manager.UserManager#modify(com.alan.po.User)
+	 */
+	@Override
+	public User modify(User user) {
+		User oldUser = userDao.load(user.getId());
+		
+		oldUser.setName(user.getName());
+		oldUser.setBirthday(user.getBirthday());
+		//oldUser.setHireDate(user.getHireDate());
+		oldUser.setGroup(user.getGroup());
+		
+		return oldUser;
+	}
 }

@@ -16,5 +16,7 @@ public interface UserDao {
 	public List<User> load(PageModel pageModel);
 	
 	public int delete(int[] uidsToBeDeleted);
+	
+	public User modify(User user);
 
 }
