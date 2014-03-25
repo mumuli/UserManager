@@ -16,14 +16,19 @@
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	<script type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
   </head>
   
   <body>
 		<h1>修改用户</h1>
 		<s:form action="user_modify.do" method="post">
-			<s:textfield key="user.name" name="姓名"/>
-			<s:date id="user.birthday" name="生日" format="yyyy-mm-dd" var="birthday"/>
-			<s:select name="groupList" list="groupList" listKey="gid" listValue="name"/>
+			<s:hidden name="user.id"/>
+			<s:textfield name="user.name" label="姓名"/>
+			<s:date name="user.birthday" format="yyyy-mm-dd" var="birthday"/>
+			<s:textfield id="birthday" name="birthday" label="生日" onclick="WdatePicker({el:'birthday'})"/>
+			<s:date name="user.hireDate" format="yyyy-mm-dd" var="hireDate"/>
+			<s:textfield id="hireDate" name="hireDate" label="入职" onclick="WdatePicker({el:'hireDate'})"/>
+			<s:select name="groupList" list="groupList" listKey="gid" listValue="name" label="组别" value="%{user.group.gid}"/>
 			<s:submit value="修改"/><s:reset value="复原"/>
 		</s:form>
 		<s:debug/>
