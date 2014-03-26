@@ -20,7 +20,10 @@
 				<param name="page">${page}</param>
 				<param name="pageSize">${pageSize}</param>
 			</result>
-			
+			<result name="load_load" type="redirectAction">
+				<param name="actionName">user_load.do</param>
+				<param name="uids">[${user.id}]</param>
+			</result>
 		</action>
     </package>
 </struts>

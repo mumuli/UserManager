@@ -28,7 +28,7 @@
 			<s:textfield id="birthday" name="birthday" label="生日" onclick="WdatePicker({el:'birthday'})"/>
 			<s:date name="user.hireDate" format="yyyy-mm-dd" var="hireDate"/>
 			<s:textfield id="hireDate" name="hireDate" label="入职" disabled="true"/>
-			<s:select name="user.group" list="groupList" listKey="id" listValue="name" label="组别" value="user.group.id"/>
+			<s:select name="group.id" list="groupList" listKey="id" listValue="name" label="组别" value="user.group.id"/>
 			<s:submit value="修改"/><s:reset value="复原"/>
 		</s:form>
 		<s:debug/>
