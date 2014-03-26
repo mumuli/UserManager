@@ -2,6 +2,8 @@ package com.alan.po;
 
 import java.util.Date;
 
+import com.opensymphony.xwork2.conversion.annotations.TypeConversion;
+
 public class User {
 	
 	private int id;
@@ -29,11 +31,12 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public Date getBirthday() {
 		return birthday;
 	}
 
+	//@TypeConversion(converter="com.alan.type.converter.UserDateTypeConverter")
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
@@ -42,6 +45,7 @@ public class User {
 		return hireDate;
 	}
 
+	//@TypeConversion(converter="com.alan.type.converter.UserDateTypeConverter")
 	public void setHireDate(Date hireDate) {
 		this.hireDate = hireDate;
 	}

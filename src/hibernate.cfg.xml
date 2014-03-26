@@ -6,7 +6,7 @@
 	<!-- Define hibernate session factory. The factory should be created by Spring -->
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3307/user_manager</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/user_manager</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">123456</property>
 		
